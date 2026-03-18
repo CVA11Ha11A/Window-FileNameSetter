@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
-
     <system:String x:Key="WindowTitle">파일 이름 일괄 변경기</system:String>
     <system:String x:Key="TargetFolder">대상 폴더:</system:String>
     <system:String x:Key="BrowseFolder">폴더 찾기</system:String>
@@ -16,4 +15,18 @@
     <system:String x:Key="Suffix">뒤에 붙이기:</system:String>
     <system:String x:Key="ReplaceWord">단어 변경:</system:String>
     <system:String x:Key="ExecuteRename">이름 변경 실행</system:String>
+
+    <system:String x:Key="Msg_NoFilesSelected">선택된 파일이 없습니다.</system:String>
+    <system:String x:Key="Msg_Notice">알림</system:String>
+    <system:String x:Key="Msg_ConfirmRename">선택된 총 {0}개 파일의 이름을 정말로 변경하시겠습니까?</system:String>
+    <system:String x:Key="Msg_ExecuteRenameTitle">이름 변경 실행</system:String>
+    <system:String x:Key="Msg_RenameResult">작업 완료&#x0a;- 성공: {0}개&#x0a;- 실패 또는 건너뜀: {1}개</system:String>
+    <system:String x:Key="Msg_Complete">완료</system:String>
+    <system:String x:Key="Msg_NoPermission">해당 폴더에 접근할 권한이 없습니다.</system:String>
+    <system:String x:Key="Msg_PermissionError">권한 오류</system:String>
+    <system:String x:Key="Msg_ReadError">파일을 읽어오는 중 오류가 발생했습니다: {0}</system:String>
+    <system:String x:Key="Msg_Error">오류</system:String>
+
+    <system:String x:Key="Msg_NoExtension">[확장자 없음]</system:String>
+    <system:String x:Key="Msg_SelectFolderTitle">변경할 파일들이 있는 폴더를 선택하세요.</system:String>
 </ResourceDictionary>

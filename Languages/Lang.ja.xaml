@@ -15,4 +15,18 @@
     <system:String x:Key="Suffix">サフィックス:</system:String>
     <system:String x:Key="ReplaceWord">文字列置換:</system:String>
     <system:String x:Key="ExecuteRename">名前変更を実行</system:String>
+
+    <system:String x:Key="Msg_NoFilesSelected">選択されたファイルがありません。</system:String>
+    <system:String x:Key="Msg_Notice">通知</system:String>
+    <system:String x:Key="Msg_ConfirmRename">選択された合計 {0} 個のファイル名を本当に変更しますか？</system:String>
+    <system:String x:Key="Msg_ExecuteRenameTitle">名前変更の実行</system:String>
+    <system:String x:Key="Msg_RenameResult">作業完了&#x0a;- 成功: {0} 個&#x0a;- 失敗またはスキップ: {1} 個</system:String>
+    <system:String x:Key="Msg_Complete">完了</system:String>
+    <system:String x:Key="Msg_NoPermission">このフォルダにアクセスする権限がありません。</system:String>
+    <system:String x:Key="Msg_PermissionError">権限エラー</system:String>
+    <system:String x:Key="Msg_ReadError">ファイルの読み込み中にエラーが発生しました: {0}</system:String>
+    <system:String x:Key="Msg_Error">エラー</system:String>
+
+    <system:String x:Key="Msg_NoExtension">[拡張子なし]</system:String>
+    <system:String x:Key="Msg_SelectFolderTitle">変更するファイルが含まれているフォルダを選択してください。</system:String>
 </ResourceDictionary>

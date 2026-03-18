@@ -8,7 +8,7 @@ namespace Window_FileNameSetter
     {
         private string _newName = string.Empty;
         private bool _isChecked = true; // 기본적으로 모든 파일은 선택된 상태로 시작합니다.
-
+        public event PropertyChangedEventHandler? PropertyChanged;
         // 사용자가 이 파일을 이름 변경 대상에 포함시킬지 여부를 결정하는 속성입니다.
         public bool IsChecked
         {
@@ -42,7 +42,7 @@ namespace Window_FileNameSetter
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        
 
         // 속성 변경 이벤트를 발생시키는 헬퍼 함수입니다.
         protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)

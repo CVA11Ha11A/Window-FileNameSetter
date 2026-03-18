@@ -15,4 +15,18 @@
     <system:String x:Key="Suffix">Suffix:</system:String>
     <system:String x:Key="ReplaceWord">Ersetzen:</system:String>
     <system:String x:Key="ExecuteRename">Umbenennen ausführen</system:String>
+
+    <system:String x:Key="Msg_NoFilesSelected">Keine Dateien ausgewählt.</system:String>
+    <system:String x:Key="Msg_Notice">Hinweis</system:String>
+    <system:String x:Key="Msg_ConfirmRename">Sind Sie sicher, dass Sie {0} ausgewählte Dateien umbenennen möchten?</system:String>
+    <system:String x:Key="Msg_ExecuteRenameTitle">Umbenennen ausführen</system:String>
+    <system:String x:Key="Msg_RenameResult">Aufgabe abgeschlossen&#x0a;- Erfolgreich: {0}&#x0a;- Fehlgeschlagen oder übersprungen: {1}</system:String>
+    <system:String x:Key="Msg_Complete">Abgeschlossen</system:String>
+    <system:String x:Key="Msg_NoPermission">Sie haben keine Berechtigung, auf diesen Ordner zuzugreifen.</system:String>
+    <system:String x:Key="Msg_PermissionError">Berechtigungsfehler</system:String>
+    <system:String x:Key="Msg_ReadError">Beim Lesen der Dateien ist ein Fehler aufgetreten: {0}</system:String>
+    <system:String x:Key="Msg_Error">Fehler</system:String>
+
+    <system:String x:Key="Msg_NoExtension">[Keine Erweiterung]</system:String>
+    <system:String x:Key="Msg_SelectFolderTitle">Bitte wählen Sie einen Ordner mit den umzubenennenden Dateien aus.</system:String>
 </ResourceDictionary>

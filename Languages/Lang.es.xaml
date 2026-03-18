@@ -15,4 +15,18 @@
     <system:String x:Key="Suffix">Sufijo:</system:String>
     <system:String x:Key="ReplaceWord">Reemplazar:</system:String>
     <system:String x:Key="ExecuteRename">Ejecutar renombrado</system:String>
+
+    <system:String x:Key="Msg_NoFilesSelected">No hay archivos seleccionados.</system:String>
+    <system:String x:Key="Msg_Notice">Aviso</system:String>
+    <system:String x:Key="Msg_ConfirmRename">¿Está seguro de que desea cambiar el nombre de {0} archivos seleccionados?</system:String>
+    <system:String x:Key="Msg_ExecuteRenameTitle">Ejecutar renombrado</system:String>
+    <system:String x:Key="Msg_RenameResult">Tarea completada&#x0a;- Éxito: {0}&#x0a;- Fallido o omitido: {1}</system:String>
+    <system:String x:Key="Msg_Complete">Completado</system:String>
+    <system:String x:Key="Msg_NoPermission">No tiene permiso para acceder a esta carpeta.</system:String>
+    <system:String x:Key="Msg_PermissionError">Error de permiso</system:String>
+    <system:String x:Key="Msg_ReadError">Ocurrió un error al leer los archivos: {0}</system:String>
+    <system:String x:Key="Msg_Error">Error</system:String>
+
+    <system:String x:Key="Msg_NoExtension">[Sin extensión]</system:String>
+    <system:String x:Key="Msg_SelectFolderTitle">Seleccione una carpeta que contenga los archivos a renombrar.</system:String>
 </ResourceDictionary>

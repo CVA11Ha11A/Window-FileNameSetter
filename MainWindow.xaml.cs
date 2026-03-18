@@ -22,7 +22,12 @@ namespace Window_FileNameSetter
             FileListView.ItemsSource = fileList;
         }
 
-        // 초기 앱 설정 적용
+        private string GetLocalizedString(string key)
+        {
+            var resource = Application.Current.TryFindResource(key);
+            return resource?.ToString() ?? key; // 키가 없으면 키 자체를 반환
+        }
+
         private void ApplySettingsOnLoad()
         {
             currentSettings = AppConfig.Load();
@@ -31,7 +36,6 @@ namespace Window_FileNameSetter
 
             LanguageComboBox.SelectionChanged -= LanguageComboBox_SelectionChanged;
 
-            // 향상된 로직: 하드코딩된 Index 대신, 아이템의 Tag 값을 순회하며 동적으로 UI를 매칭합니다.
             foreach (ComboBoxItem item in LanguageComboBox.Items)
             {
                 if (item.Tag != null && item.Tag.ToString() == currentSettings.Language)
@@ -41,7 +45,6 @@ namespace Window_FileNameSetter
                 }
             }
 
-            // 만약 저장된 언어가 콤보박스에 없다면 기본값인 첫 번째(한국어)를 선택합니다.
             if (LanguageComboBox.SelectedItem == null)
             {
                 LanguageComboBox.SelectedIndex = 0;
@@ -58,7 +61,11 @@ namespace Window_FileNameSetter
 
         private void BrowseFolderButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFolderDialog dialog = new OpenFolderDialog { Title = "변경할 파일들이 있는 폴더를 선택하세요." };
+            // 폴더 선택 창의 제목도 다국어 단어장에서 가져오도록 수정했습니다.
+            OpenFolderDialog dialog = new OpenFolderDialog
+            {
+                Title = GetLocalizedString("Msg_SelectFolderTitle")
+            };
 
             if (dialog.ShowDialog() == true)
             {
@@ -76,7 +83,6 @@ namespace Window_FileNameSetter
             }
         }
 
-        // 폴더 탐색 및 파일 스캔
         private void ScanFolder(string targetDirectory)
         {
             allFiles.Clear();
@@ -96,14 +102,19 @@ namespace Window_FileNameSetter
                 foreach (string filePath in files)
                 {
                     string ext = Path.GetExtension(filePath).ToLower();
-                    if (string.IsNullOrEmpty(ext)) ext = "[확장자 없음]";
+
+                    // 지적해주신 "[확장자 없음]" 하드코딩을 단어장 로드 방식으로 수정했습니다.
+                    if (string.IsNullOrEmpty(ext))
+                    {
+                        ext = GetLocalizedString("Msg_NoExtension");
+                    }
 
                     FileItem item = new FileItem
                     {
                         FullPath = filePath,
-                        CurrentName = Path.GetFileName(filePath),
-                        NewName = Path.GetFileName(filePath),
-                        FilePath = Path.GetDirectoryName(filePath),
+                        CurrentName = Path.GetFileName(filePath) ?? string.Empty,
+                        NewName = Path.GetFileName(filePath) ?? string.Empty,
+                        FilePath = Path.GetDirectoryName(filePath) ?? string.Empty,
                         Extension = ext,
                         IsChecked = true
                     };
@@ -129,11 +140,12 @@ namespace Window_FileNameSetter
             }
             catch (UnauthorizedAccessException)
             {
-                MessageBox.Show("해당 폴더에 접근할 권한이 없습니다.", "권한 오류", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(GetLocalizedString("Msg_NoPermission"), GetLocalizedString("Msg_PermissionError"), MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"파일을 읽어오는 중 오류가 발생했습니다: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+                string errorMsg = string.Format(GetLocalizedString("Msg_ReadError"), ex.Message);
+                MessageBox.Show(errorMsg, GetLocalizedString("Msg_Error"), MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -150,7 +162,7 @@ namespace Window_FileNameSetter
             {
                 if (item is CheckBox chk && chk.IsChecked == true)
                 {
-                    selectedExtensions.Add(chk.Content.ToString());
+                    selectedExtensions.Add(chk.Content.ToString() ?? string.Empty);
                 }
             }
 
@@ -190,7 +202,6 @@ namespace Window_FileNameSetter
             UpdatePreview();
         }
 
-        // 이름 변경 규칙 실시간 적용
         private void UpdatePreview()
         {
             if (PrefixTextBox == null || SuffixTextBox == null || ReplaceOldTextBox == null || ReplaceNewTextBox == null)
@@ -215,7 +226,6 @@ namespace Window_FileNameSetter
             }
         }
 
-        // 실제 파일 이름 변경 실행
         private void ExecuteRenameButton_Click(object sender, RoutedEventArgs e)
         {
             int targetCount = 0;
@@ -226,15 +236,12 @@ namespace Window_FileNameSetter
 
             if (targetCount == 0)
             {
-                MessageBox.Show("선택된 파일이 없습니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(GetLocalizedString("Msg_NoFilesSelected"), GetLocalizedString("Msg_Notice"), MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            MessageBoxResult confirmResult = MessageBox.Show(
-                $"선택된 총 {targetCount}개 파일의 이름을 정말로 변경하시겠습니까?",
-                "이름 변경 실행",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question);
+            string confirmMsg = string.Format(GetLocalizedString("Msg_ConfirmRename"), targetCount);
+            MessageBoxResult confirmResult = MessageBox.Show(confirmMsg, GetLocalizedString("Msg_ExecuteRenameTitle"), MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (confirmResult != MessageBoxResult.Yes) return;
 
@@ -266,8 +273,8 @@ namespace Window_FileNameSetter
                 }
             }
 
-            MessageBox.Show($"작업 완료\n- 성공: {successCount}개\n- 실패 또는 건너뜀: {failCount}개",
-                            "완료", MessageBoxButton.OK, MessageBoxImage.Information);
+            string resultMsg = string.Format(GetLocalizedString("Msg_RenameResult"), successCount, failCount);
+            MessageBox.Show(resultMsg, GetLocalizedString("Msg_Complete"), MessageBoxButton.OK, MessageBoxImage.Information);
 
             if (!string.IsNullOrEmpty(FolderPathTextBox.Text))
             {
@@ -275,12 +282,11 @@ namespace Window_FileNameSetter
             }
         }
 
-        // 언어 변경 이벤트 핸들러
         private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (LanguageComboBox.SelectedItem is ComboBoxItem selectedItem)
             {
-                string langCode = selectedItem.Tag.ToString();
+                string langCode = selectedItem.Tag.ToString() ?? "en";
                 currentSettings.Language = langCode;
 
                 ResourceDictionary dict = new ResourceDictionary();

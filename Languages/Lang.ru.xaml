@@ -15,4 +15,18 @@
     <system:String x:Key="Suffix">Суффикс:</system:String>
     <system:String x:Key="ReplaceWord">Заменить:</system:String>
     <system:String x:Key="ExecuteRename">Выполнить</system:String>
+
+    <system:String x:Key="Msg_NoFilesSelected">Файлы не выбраны.</system:String>
+    <system:String x:Key="Msg_Notice">Уведомление</system:String>
+    <system:String x:Key="Msg_ConfirmRename">Вы уверены, что хотите переименовать {0} выбранных файлов?</system:String>
+    <system:String x:Key="Msg_ExecuteRenameTitle">Выполнить переименование</system:String>
+    <system:String x:Key="Msg_RenameResult">Задача завершена&#x0a;- Успешно: {0}&#x0a;- Ошибка или пропущено: {1}</system:String>
+    <system:String x:Key="Msg_Complete">Готово</system:String>
+    <system:String x:Key="Msg_NoPermission">У вас нет прав доступа к этой папке.</system:String>
+    <system:String x:Key="Msg_PermissionError">Ошибка доступа</system:String>
+    <system:String x:Key="Msg_ReadError">Произошла ошибка при чтении файлов: {0}</system:String>
+    <system:String x:Key="Msg_Error">Ошибка</system:String>
+
+    <system:String x:Key="Msg_NoExtension">[Нет расширения]</system:String>
+    <system:String x:Key="Msg_SelectFolderTitle">Пожалуйста, выберите папку с файлами для переименования.</system:String>
 </ResourceDictionary>

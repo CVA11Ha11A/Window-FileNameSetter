@@ -15,4 +15,18 @@
     <system:String x:Key="Suffix">Suffixe :</system:String>
     <system:String x:Key="ReplaceWord">Remplacer :</system:String>
     <system:String x:Key="ExecuteRename">Exécuter le renommage</system:String>
+
+    <system:String x:Key="Msg_NoFilesSelected">Aucun fichier sélectionné.</system:String>
+    <system:String x:Key="Msg_Notice">Avis</system:String>
+    <system:String x:Key="Msg_ConfirmRename">Êtes-vous sûr de vouloir renommer {0} fichiers sélectionnés ?</system:String>
+    <system:String x:Key="Msg_ExecuteRenameTitle">Exécuter le renommage</system:String>
+    <system:String x:Key="Msg_RenameResult">Tâche terminée&#x0a;- Succès : {0}&#x0a;- Échec ou ignoré : {1}</system:String>
+    <system:String x:Key="Msg_Complete">Terminé</system:String>
+    <system:String x:Key="Msg_NoPermission">Vous n'avez pas l'autorisation d'accéder à ce dossier.</system:String>
+    <system:String x:Key="Msg_PermissionError">Erreur d'autorisation</system:String>
+    <system:String x:Key="Msg_ReadError">Une erreur s'est produite lors de la lecture des fichiers : {0}</system:String>
+    <system:String x:Key="Msg_Error">Erreur</system:String>
+
+    <system:String x:Key="Msg_NoExtension">[Aucune extension]</system:String>
+    <system:String x:Key="Msg_SelectFolderTitle">Veuillez sélectionner un dossier contenant les fichiers à renommer.</system:String>
 </ResourceDictionary>
