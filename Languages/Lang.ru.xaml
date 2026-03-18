@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="WindowTitle">Пакетное переименование</system:String>
+    <system:String x:Key="TargetFolder">Целевая папка:</system:String>
+    <system:String x:Key="BrowseFolder">Обзор</system:String>
+    <system:String x:Key="DeepSearch">Включая вложенные папки</system:String>
+    <system:String x:Key="ExtensionFilter">Фильтр расширений</system:String>
+    <system:String x:Key="TargetFiles">Целевые файлы</system:String>
+    <system:String x:Key="SelectAll">Выбрать все</system:String>
+    <system:String x:Key="CurrentName">Текущее имя</system:String>
+    <system:String x:Key="PreviewName">Новое имя (Предпросмотр)</system:String>
+    <system:String x:Key="FilePath">Путь</system:String>
+    <system:String x:Key="Prefix">Префикс:</system:String>
+    <system:String x:Key="Suffix">Суффикс:</system:String>
+    <system:String x:Key="ReplaceWord">Заменить:</system:String>
+    <system:String x:Key="ExecuteRename">Выполнить</system:String>
+</ResourceDictionary>

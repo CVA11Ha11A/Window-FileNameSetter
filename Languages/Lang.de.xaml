@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="WindowTitle">Datei-Umbenenner</system:String>
+    <system:String x:Key="TargetFolder">Zielordner:</system:String>
+    <system:String x:Key="BrowseFolder">Durchsuchen</system:String>
+    <system:String x:Key="DeepSearch">Unterordner einschließen</system:String>
+    <system:String x:Key="ExtensionFilter">Erweiterungsfilter</system:String>
+    <system:String x:Key="TargetFiles">Zieldateien</system:String>
+    <system:String x:Key="SelectAll">Alle auswählen</system:String>
+    <system:String x:Key="CurrentName">Aktueller Name</system:String>
+    <system:String x:Key="PreviewName">Neuer Name (Vorschau)</system:String>
+    <system:String x:Key="FilePath">Pfad</system:String>
+    <system:String x:Key="Prefix">Präfix:</system:String>
+    <system:String x:Key="Suffix">Suffix:</system:String>
+    <system:String x:Key="ReplaceWord">Ersetzen:</system:String>
+    <system:String x:Key="ExecuteRename">Umbenennen ausführen</system:String>
+</ResourceDictionary>

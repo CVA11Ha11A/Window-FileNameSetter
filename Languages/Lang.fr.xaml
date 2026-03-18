@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="WindowTitle">Renommeur de Fichiers</system:String>
+    <system:String x:Key="TargetFolder">Dossier cible :</system:String>
+    <system:String x:Key="BrowseFolder">Parcourir</system:String>
+    <system:String x:Key="DeepSearch">Inclure les sous-dossiers</system:String>
+    <system:String x:Key="ExtensionFilter">Filtre d'extension</system:String>
+    <system:String x:Key="TargetFiles">Fichiers cibles</system:String>
+    <system:String x:Key="SelectAll">Tout sélectionner</system:String>
+    <system:String x:Key="CurrentName">Nom actuel</system:String>
+    <system:String x:Key="PreviewName">Nouveau nom (Aperçu)</system:String>
+    <system:String x:Key="FilePath">Chemin</system:String>
+    <system:String x:Key="Prefix">Préfixe :</system:String>
+    <system:String x:Key="Suffix">Suffixe :</system:String>
+    <system:String x:Key="ReplaceWord">Remplacer :</system:String>
+    <system:String x:Key="ExecuteRename">Exécuter le renommage</system:String>
+</ResourceDictionary>

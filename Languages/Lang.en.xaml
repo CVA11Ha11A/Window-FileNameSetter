@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="WindowTitle">Batch File Renamer</system:String>
+    <system:String x:Key="TargetFolder">Target Folder:</system:String>
+    <system:String x:Key="BrowseFolder">Browse</system:String>
+    <system:String x:Key="DeepSearch">Include Subfolders (Deep Search)</system:String>
+    <system:String x:Key="ExtensionFilter">Extension Filter</system:String>
+    <system:String x:Key="TargetFiles">Target Files</system:String>
+    <system:String x:Key="SelectAll">Select All</system:String>
+    <system:String x:Key="CurrentName">Current Name</system:String>
+    <system:String x:Key="PreviewName">New Name (Preview)</system:String>
+    <system:String x:Key="FilePath">Path</system:String>
+    <system:String x:Key="Prefix">Prefix:</system:String>
+    <system:String x:Key="Suffix">Suffix:</system:String>
+    <system:String x:Key="ReplaceWord">Replace:</system:String>
+    <system:String x:Key="ExecuteRename">Execute Rename</system:String>
+</ResourceDictionary>

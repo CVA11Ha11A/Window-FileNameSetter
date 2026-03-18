@@ -1,12 +1,107 @@
 ﻿<Window x:Class="Window_FileNameSetter.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Window_FileNameSetter"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="{DynamicResource WindowTitle}" Height="600" Width="900">
 
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock Text="{DynamicResource TargetFolder}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="FolderPathTextBox" Width="300" VerticalAlignment="Center" IsReadOnly="True" />
+                <Button x:Name="BrowseFolderButton" Content="{DynamicResource BrowseFolder}" Width="80" Margin="10,0,0,0" Padding="5" Click="BrowseFolderButton_Click"/>
+                <CheckBox x:Name="DeepSearchCheckBox" Content="{DynamicResource DeepSearch}" VerticalAlignment="Center" Margin="20,0,0,0" Checked="DeepSearchCheckBox_Changed" Unchecked="DeepSearchCheckBox_Changed"/>
+            </StackPanel>
+
+            <ComboBox x:Name="LanguageComboBox" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <ComboBoxItem Content="한국어" Tag="ko" />
+                <ComboBoxItem Content="English" Tag="en" />
+                <ComboBoxItem Content="日本語" Tag="ja" />
+                <ComboBoxItem Content="中文" Tag="zh" />
+                <ComboBoxItem Content="Русский" Tag="ru" />
+                <ComboBoxItem Content="Deutsch" Tag="de" />
+                <ComboBoxItem Content="Español" Tag="es" />
+                <ComboBoxItem Content="Français" Tag="fr" />
+            </ComboBox>
+        </Grid>
+
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="{DynamicResource ExtensionFilter}" Margin="0,0,10,10">
+            <ListBox x:Name="ExtensionListBox">
+            </ListBox>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,10">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource TargetFiles}" Margin="0,0,15,0" FontWeight="Bold"/>
+                    <CheckBox x:Name="SelectAllCheckBox" Content="{DynamicResource SelectAll}" IsChecked="True" VerticalAlignment="Center" Checked="SelectAllCheckBox_Changed" Unchecked="SelectAllCheckBox_Changed"/>
+                </StackPanel>
+            </GroupBox.Header>
+            <ListView x:Name="FileListView" SelectionMode="Extended">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="40">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="{DynamicResource CurrentName}" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CurrentName}" TextTrimming="CharacterEllipsis" ToolTip="{Binding CurrentName}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="{DynamicResource PreviewName}" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NewName}" TextTrimming="CharacterEllipsis" ToolTip="{Binding NewName}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="{DynamicResource FilePath}" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding FilePath}" TextTrimming="CharacterEllipsis" ToolTip="{Binding FilePath}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock Text="{DynamicResource Prefix}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="PrefixTextBox" Width="100" Margin="0,0,15,0" VerticalAlignment="Center" TextChanged="RuleTextBox_TextChanged"/>
+
+                <TextBlock Text="{DynamicResource Suffix}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="SuffixTextBox" Width="100" Margin="0,0,15,0" VerticalAlignment="Center" TextChanged="RuleTextBox_TextChanged"/>
+
+                <TextBlock Text="{DynamicResource ReplaceWord}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="ReplaceOldTextBox" Width="80" Margin="0,0,5,0" VerticalAlignment="Center" TextChanged="RuleTextBox_TextChanged" />
+                <TextBlock Text="->" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="ReplaceNewTextBox" Width="80" VerticalAlignment="Center" TextChanged="RuleTextBox_TextChanged"/>
+            </StackPanel>
+
+            <Button x:Name="ExecuteRenameButton" Content="{DynamicResource ExecuteRename}" Width="150" Height="40" 
+                    HorizontalAlignment="Right" Background="#FF0078D7" Foreground="White" FontWeight="Bold" Click="ExecuteRenameButton_Click"/>
+        </Grid>
     </Grid>
 </Window>

@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="WindowTitle">ファイル名一括変更</system:String>
+    <system:String x:Key="TargetFolder">対象フォルダ:</system:String>
+    <system:String x:Key="BrowseFolder">参照</system:String>
+    <system:String x:Key="DeepSearch">サブフォルダを含む</system:String>
+    <system:String x:Key="ExtensionFilter">拡張子フィルタ</system:String>
+    <system:String x:Key="TargetFiles">変更対象ファイル</system:String>
+    <system:String x:Key="SelectAll">すべて選択</system:String>
+    <system:String x:Key="CurrentName">現在の名前</system:String>
+    <system:String x:Key="PreviewName">変更後の名前 (プレビュー)</system:String>
+    <system:String x:Key="FilePath">パス</system:String>
+    <system:String x:Key="Prefix">プレフィックス:</system:String>
+    <system:String x:Key="Suffix">サフィックス:</system:String>
+    <system:String x:Key="ReplaceWord">文字列置換:</system:String>
+    <system:String x:Key="ExecuteRename">名前変更を実行</system:String>
+</ResourceDictionary>
