@@ -25,7 +25,7 @@ namespace Window_FileNameSetter
         private string GetLocalizedString(string key)
         {
             var resource = Application.Current.TryFindResource(key);
-            return resource?.ToString() ?? key; // 키가 없으면 키 자체를 반환
+            return resource?.ToString() ?? key;
         }
 
         private void ApplySettingsOnLoad()
@@ -38,7 +38,7 @@ namespace Window_FileNameSetter
 
             foreach (ComboBoxItem item in LanguageComboBox.Items)
             {
-                if (item.Tag != null && item.Tag.ToString() == currentSettings.Language)
+                if (item.Tag?.ToString() == currentSettings.Language)
                 {
                     LanguageComboBox.SelectedItem = item;
                     break;
@@ -61,7 +61,6 @@ namespace Window_FileNameSetter
 
         private void BrowseFolderButton_Click(object sender, RoutedEventArgs e)
         {
-            // 폴더 선택 창의 제목도 다국어 단어장에서 가져오도록 수정했습니다.
             OpenFolderDialog dialog = new OpenFolderDialog
             {
                 Title = GetLocalizedString("Msg_SelectFolderTitle")
@@ -101,9 +100,8 @@ namespace Window_FileNameSetter
 
                 foreach (string filePath in files)
                 {
-                    string ext = Path.GetExtension(filePath).ToLower();
+                    string ext = Path.GetExtension(filePath)?.ToLower() ?? string.Empty;
 
-                    // 지적해주신 "[확장자 없음]" 하드코딩을 단어장 로드 방식으로 수정했습니다.
                     if (string.IsNullOrEmpty(ext))
                     {
                         ext = GetLocalizedString("Msg_NoExtension");
@@ -162,7 +160,8 @@ namespace Window_FileNameSetter
             {
                 if (item is CheckBox chk && chk.IsChecked == true)
                 {
-                    selectedExtensions.Add(chk.Content.ToString() ?? string.Empty);
+                    string extName = chk.Content?.ToString() ?? string.Empty;
+                    selectedExtensions.Add(extName);
                 }
             }
 
@@ -214,7 +213,7 @@ namespace Window_FileNameSetter
 
             foreach (FileItem file in fileList)
             {
-                string nameWithoutExtension = Path.GetFileNameWithoutExtension(file.CurrentName);
+                string nameWithoutExtension = Path.GetFileNameWithoutExtension(file.CurrentName) ?? string.Empty;
 
                 if (!string.IsNullOrEmpty(oldWord))
                 {
@@ -286,10 +285,13 @@ namespace Window_FileNameSetter
         {
             if (LanguageComboBox.SelectedItem is ComboBoxItem selectedItem)
             {
-                string langCode = selectedItem.Tag.ToString() ?? "en";
+                string langCode = selectedItem.Tag?.ToString() ?? "en";
                 currentSettings.Language = langCode;
 
                 ResourceDictionary dict = new ResourceDictionary();
+
+                // [핵심 수정] Pack URI 절대 경로 적용
+                string packUri = $"pack://application:,,,/Languages/Lang.{langCode}.xaml";
 
                 switch (langCode)
                 {
@@ -301,10 +303,10 @@ namespace Window_FileNameSetter
                     case "de":
                     case "es":
                     case "fr":
-                        dict.Source = new Uri($"Languages/Lang.{langCode}.xaml", UriKind.Relative);
+                        dict.Source = new Uri(packUri, UriKind.Absolute);
                         break;
                     default:
-                        dict.Source = new Uri("Languages/Lang.ko.xaml", UriKind.Relative);
+                        dict.Source = new Uri("pack://application:,,,/Languages/Lang.en.xaml", UriKind.Absolute);
                         break;
                 }
 
