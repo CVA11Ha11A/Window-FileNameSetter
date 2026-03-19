@@ -15,6 +15,7 @@
     <system:String x:Key="Suffix">Суффикс:</system:String>
     <system:String x:Key="ReplaceWord">Заменить:</system:String>
     <system:String x:Key="ExecuteRename">Выполнить</system:String>
+    <system:String x:Key="RefreshFolder">Обновить</system:String>
 
     <system:String x:Key="Msg_NoFilesSelected">Файлы не выбраны.</system:String>
     <system:String x:Key="Msg_Notice">Уведомление</system:String>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,8 @@ namespace Window_FileNameSetter
         private AppSettings currentSettings = new AppSettings();
         private ObservableCollection<FileItem> fileList = new ObservableCollection<FileItem>();
         private List<FileItem> allFiles = new List<FileItem>();
+
+        private bool isUpdatingAll = false;
 
         public MainWindow()
         {
@@ -74,6 +77,26 @@ namespace Window_FileNameSetter
             }
         }
 
+        // 새로고침 버튼 동작
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(FolderPathTextBox.Text) && Directory.Exists(FolderPathTextBox.Text))
+            {
+                // 현재 유저가 보고 있던 필터 상태를 기억합니다.
+                HashSet<string> currentFilters = new HashSet<string>();
+                foreach (var item in ExtensionListBox.Items)
+                {
+                    if (item is CheckBox chk && chk.IsChecked == true)
+                    {
+                        currentFilters.Add(chk.Content?.ToString() ?? string.Empty);
+                    }
+                }
+
+                // 기억한 필터를 넘겨주며 폴더를 다시 스캔합니다.
+                ScanFolder(FolderPathTextBox.Text, currentFilters);
+            }
+        }
+
         private void DeepSearchCheckBox_Changed(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(FolderPathTextBox.Text) && Directory.Exists(FolderPathTextBox.Text))
@@ -82,7 +105,7 @@ namespace Window_FileNameSetter
             }
         }
 
-        private void ScanFolder(string targetDirectory)
+        private void ScanFolder(string targetDirectory, HashSet<string> retainFilters = null)
         {
             allFiles.Clear();
             fileList.Clear();
@@ -117,6 +140,8 @@ namespace Window_FileNameSetter
                         IsChecked = true
                     };
 
+                    item.PropertyChanged += FileItem_PropertyChanged;
+
                     allFiles.Add(item);
                     foundExtensions.Add(ext);
                 }
@@ -125,7 +150,8 @@ namespace Window_FileNameSetter
                 {
                     CheckBox chk = new CheckBox();
                     chk.Content = ext;
-                    chk.IsChecked = true;
+
+                    chk.IsChecked = (retainFilters != null) ? retainFilters.Contains(ext) : true;
                     chk.Margin = new Thickness(0, 2, 0, 2);
 
                     chk.Checked += ExtensionCheckBox_Changed;
@@ -144,6 +170,14 @@ namespace Window_FileNameSetter
             {
                 string errorMsg = string.Format(GetLocalizedString("Msg_ReadError"), ex.Message);
                 MessageBox.Show(errorMsg, GetLocalizedString("Msg_Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void FileItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (!isUpdatingAll && e.PropertyName == "IsChecked")
+            {
+                UpdatePreview();
             }
         }
 
@@ -175,11 +209,13 @@ namespace Window_FileNameSetter
                 }
             }
 
+            isUpdatingAll = true;
             bool isAllChecked = SelectAllCheckBox?.IsChecked ?? true;
             foreach (var file in fileList)
             {
                 file.IsChecked = isAllChecked;
             }
+            isUpdatingAll = false;
 
             UpdatePreview();
         }
@@ -188,12 +224,16 @@ namespace Window_FileNameSetter
         {
             if (fileList == null || SelectAllCheckBox == null) return;
 
+            isUpdatingAll = true;
             bool isAllChecked = SelectAllCheckBox.IsChecked ?? false;
 
             foreach (var item in fileList)
             {
                 item.IsChecked = isAllChecked;
             }
+            isUpdatingAll = false;
+
+            UpdatePreview();
         }
 
         private void RuleTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -213,6 +253,12 @@ namespace Window_FileNameSetter
 
             foreach (FileItem file in fileList)
             {
+                if (!file.IsChecked)
+                {
+                    file.NewName = file.CurrentName;
+                    continue;
+                }
+
                 string nameWithoutExtension = Path.GetFileNameWithoutExtension(file.CurrentName) ?? string.Empty;
 
                 if (!string.IsNullOrEmpty(oldWord))
@@ -277,7 +323,16 @@ namespace Window_FileNameSetter
 
             if (!string.IsNullOrEmpty(FolderPathTextBox.Text))
             {
-                ScanFolder(FolderPathTextBox.Text);
+                HashSet<string> currentFilters = new HashSet<string>();
+                foreach (var item in ExtensionListBox.Items)
+                {
+                    if (item is CheckBox chk && chk.IsChecked == true)
+                    {
+                        currentFilters.Add(chk.Content?.ToString() ?? string.Empty);
+                    }
+                }
+
+                ScanFolder(FolderPathTextBox.Text, currentFilters);
             }
         }
 
@@ -290,7 +345,6 @@ namespace Window_FileNameSetter
 
                 ResourceDictionary dict = new ResourceDictionary();
 
-                // [핵심 수정] Pack URI 절대 경로 적용
                 string packUri = $"pack://application:,,,/Languages/Lang.{langCode}.xaml";
 
                 switch (langCode)

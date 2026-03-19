@@ -15,6 +15,7 @@
     <system:String x:Key="Suffix">后缀:</system:String>
     <system:String x:Key="ReplaceWord">替换:</system:String>
     <system:String x:Key="ExecuteRename">执行重命名</system:String>
+    <system:String x:Key="RefreshFolder">重新装入</system:String>
 
     <system:String x:Key="Msg_NoFilesSelected">未选择任何文件。</system:String>
     <system:String x:Key="Msg_Notice">提示</system:String>

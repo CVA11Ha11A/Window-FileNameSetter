@@ -15,6 +15,7 @@
     <system:String x:Key="Suffix">Suffix:</system:String>
     <system:String x:Key="ReplaceWord">Ersetzen:</system:String>
     <system:String x:Key="ExecuteRename">Umbenennen ausführen</system:String>
+    <system:String x:Key="RefreshFolder">Aktualisieren</system:String>
 
     <system:String x:Key="Msg_NoFilesSelected">Keine Dateien ausgewählt.</system:String>
     <system:String x:Key="Msg_Notice">Hinweis</system:String>

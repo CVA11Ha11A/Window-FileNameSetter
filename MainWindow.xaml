@@ -20,6 +20,7 @@
                 <TextBlock Text="{DynamicResource TargetFolder}" VerticalAlignment="Center" Margin="0,0,5,0"/>
                 <TextBox x:Name="FolderPathTextBox" Width="300" VerticalAlignment="Center" IsReadOnly="True" />
                 <Button x:Name="BrowseFolderButton" Content="{DynamicResource BrowseFolder}" Width="80" Margin="10,0,0,0" Padding="5" Click="BrowseFolderButton_Click"/>
+                <Button Content="{DynamicResource RefreshFolder}" Width="80" Margin="5,0,0,0" Click="RefreshButton_Click" />
                 <CheckBox x:Name="DeepSearchCheckBox" Content="{DynamicResource DeepSearch}" VerticalAlignment="Center" Margin="20,0,0,0" Checked="DeepSearchCheckBox_Changed" Unchecked="DeepSearchCheckBox_Changed"/>
             </StackPanel>
 

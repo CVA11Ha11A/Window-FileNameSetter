@@ -15,6 +15,7 @@
     <system:String x:Key="Suffix">サフィックス:</system:String>
     <system:String x:Key="ReplaceWord">文字列置換:</system:String>
     <system:String x:Key="ExecuteRename">名前変更を実行</system:String>
+    <system:String x:Key="RefreshFolder">リフレッシュ</system:String>
 
     <system:String x:Key="Msg_NoFilesSelected">選択されたファイルがありません。</system:String>
     <system:String x:Key="Msg_Notice">通知</system:String>
